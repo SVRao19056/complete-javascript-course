@@ -11,7 +11,14 @@ import Recipe from './models/Recipe'
  * @description conatins all the application state 
  */
 const state = {};
-const debug = true;
+/** NOTE
+ * @description when debug = true , does not call Api returns mock data from config
+ */
+const debug = true; 
+
+/**
+ * @description App Controller
+ */
 const controlSearch = async () => {
     const query = searchView.getInput();
     console.log(`Query ${query}`)
@@ -60,5 +67,11 @@ const btn = e.target.closest('.btn-inline');
     }
     
 })
+
+/**
+ * @description Recipe controller
+ */
+const r = new Recipe(47275)
+r.getRecipe(debug);
 
 
