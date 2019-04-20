@@ -5,6 +5,7 @@
 import Search from './models/Search';
 import {elements  , renderLoader , clearLoader}  from './views/base';
 import * as searchView from './views/searchView';
+import Recipe from './models/Recipe'
 
 /**
  * @description conatins all the application state 

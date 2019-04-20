@@ -15,10 +15,10 @@ const limitRecipeTitle = (title, limit = 17) => {
         if (acc + cur.length <= limit) {
             newFile.push(cur)
         }
-        return acc + cur.lenght
+        return acc + cur.length
     }, 0)
     console.log(newFile);
-    console.log(newFile.join(' '));
+    console.log(`${newFile.join(' ')}`);
     return `${newFile.join(' ')}...`;
 }
     return title;
