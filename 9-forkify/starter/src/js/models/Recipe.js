@@ -1,5 +1,5 @@
-import axios from 'axios'
-import {proxy , key ,url,apiMethods,mockData} from '../config'
+import axios from 'axios';
+import {proxy , key ,url,apiMethods,mockData} from '../config';
 
 export default class Recipe{
     constructor(id){
@@ -16,18 +16,42 @@ export default class Recipe{
         try{
             console.log(`Recipe Url ${apiUrl}`)
          if (!debug)
-         {
-          let res =  await axios.get(apiUrl);
-         if(res) console.log(JSON.stringify(res.data));
-          this.result = res.data.recipe || res.data;
-         }else{
+         { /** Actual Api Call ***/
+          const res =  await axios.get(apiUrl);
+         if(res) console.log(`in Recipe NOT DEBUG --${JSON.stringify(res.data)}`);
+          this.title = res.data.recipe.title;
+          this.author = res.data.recipe.publisher;
+          this.img = res.data.recipe.image_url;
+          this.url = res.data.recipe.source_url;
+          this.ingredients = res.data.recipe.ingredients;
+          }else{
              /** Debug path using only mocked data */
-            this.result = JSON.parse(mockData.Recipe);
-            if(this.result) console.log(JSON.stringify(this.result));
+             const result = JSON.parse(mockData.Recipe);
+             if(result) console.log(`in Recipe DEBUG MODE --${JSON.stringify(result)}`);
+            this.title = result.recipe.title;
+            this.author = result.recipe.publisher;
+            this.img = result.recipe.image_url;
+            this.url = result.recipe.source_url;
+            this.ingredients = result.recipe.ingredients;
          }
 
         }catch (err){
             console.log(`getRecipe Error ${err}`);
+            alert('Something went wrong');
         }
     }
+    calServings() {
+        console.log('called calServings');
+        this.servings = 4;
+    }
+
+    calcTime() {
+        /* assumming that 3 ingredents takes 15 minutes each */
+        console.log('called calcTime');
+        const numIng = this.ingredients.length;
+        const periods = Math.ceil(numIng/3);
+        this.time = periods * 15;
+    }
+
+    
 }
